@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>COW - ruminator</title>
+
+        <script
+        src="https://code.jquery.com/jquery-3.1.1.min.js"
+        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+        crossorigin="anonymous"></script>
+
+        <!-- BOOTSTRAP Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+
+        <link href='//fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
+
+        <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+        <script type="text/javascript" src="/js/ruminator.js"></script>
+
+    </head>
+    <body>
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="tabs">
+                        <button class="btn" id="to-dataset">dataset</button>
+                        <button class="btn" id="to-context">context</button>
+                        <button class="btn" id="to-columns">columns</button>
+                        <button class="btn btn-info" id="to-help">?</button>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    
+                    
+
+                    <div class="tabcontent" id="dataset">dataset</div>
+
+                    <div class="tabcontent" id="context">context</div>
+
+                    <div class="tabcontent" id="columncontainer">
+                      <div id="expandbuttons">
+                        <a href="#" id="expand">expand all</a> | 
+                        <a href="#" id="collapse">collapse all</a>
+                      </div>
+                      <div id="columns">
+                      </div>
+                    </div>
+
+                    <div class="tabcontent" id="help">
+                        <h1>Ruminator, why?</h1>
+
+
+                        <h1>How to ruminate</h1>
+                    </div>
+
+
+                </div>
+                <div class="col-md-1">
+                    <a class="cowbutton" href="#" id="left" title="read json into form">
+                        <img style="width:70px;" src="/img/cow-left-light.png" />
+                    </a>
+
+                    <a class="cowbutton" href="#" id="right" title="create json from form">
+                        <img style="width:70px;" src="/img/cow-right-light.png" />
+                    </a>
+                    
+                </div>
+                <div class="col-md-5">
+
+
+                    <form id="jsonform" action="#" method="POST">
+
+                    <textarea id="cowjson" name="cowjson" class="form-control">{
+ "dialect": {
+  "quoteChar": "\"", 
+  "delimiter": ",", 
+  "encoding": "ascii"
+ }, 
+ "dcat:keyword": [], 
+ "dc:license": {
+  "@id": "https://cran.r-project.org/web/licenses/GPL-3"
+ }, 
+ "dc:publisher": {
+  "schema:name": "CLARIAH Structured Data Hub - Datalegend", 
+  "schema:url": {
+   "@id": "http://datalegend.org"
+  }
+ }, 
+  "dc:author": {
+    "rdf:type": [
+      {
+        "@id": "foaf:Person"
+      },
+      {
+        "@id": "prov:Person"
+      }
+    ],
+    "foaf:name": ["Auke Rijpma"]
+  },
+   "prov:wasDerivedFrom": [{
+     "rdf:type": {
+         "@id": "bibo:Book"
+     },
+     "dc:title": {
+         "@value": "Essai sur la Statistique de la Population française",
+         "@lang": "fr"
+     },
+     "dc:author": ["Angeville, A."],
+     "dc:publisher": "Paris: F. Doufour",
+     "dc:date": {"@value":"1836", "@type":"xsd:Year"}
+ }, {
+     "rdf:type": {
+         "@id": "bibo:Book"
+     },
+     "dc:title": {
+         "@value": "Essai sur la statistique morale de la France",
+         "@lang": "fr"
+     },
+     "dc:author": ["Guerry, A.-M."],
+     "dc:publisher": "Paris: Crochard",
+     "dc:date": {"@value":"1833", "@type":"xsd:Year"}
+ }, {
+     "rdf:type": {
+         "@id": "bibo:Book"
+     },
+     "dc:title": {
+         "@value": "De la prostitution dans la ville de Paris",
+         "@lang": "fr"
+     },
+     "dc:author": ["Parent-Duchatelet, A."],
+     "dc:publisher": "Paris: Crochard",
+     "dc:date": {"@value":"1857", "@type":"xsd:Year"}
+ }, {
+     "@id": "https://cran.r-project.org/web/packages/Guerry/"
+ }],
+ "url": "guerry.csv", 
+ "@context": [
+  "http://www.w3.org/ns/csvw", 
+  {
+   "@base": "http://data.socialhistory.org/resource/guerry/", 
+   "@language": "en"
+  }, 
+  {
+   "owl": "http://www.w3.org/2002/07/owl#", 
+   "dbo": "http://dbpedia.org/ontology/", 
+   "clioctr": "http://data.socialhistory.org/resource/clio/country/", 
+   "hisclass": "http://data.socialhistory.org/resource/hisclass/", 
+   "hisco-product": "http://data.socialhistory.org/resource/hisco/product/", 
+   "hisco-entry": "http://data.socialhistory.org/resource/hisco/entry/", 
+   "ldp": "http://www.w3.org/ns/ldp#", 
+   "clio": "http://data.socialhistory.org/resource/clio/", 
+   "occhisco": "http://data.socialhistory.org/resource/napp/OCCHISCO/", 
+   "dbr": "http://dbpedia.org/resource/", 
+   "skos": "http://www.w3.org/2004/02/skos/core#", 
+   "xml": "http://www.w3.org/XML/1998/namespace/", 
+   "bibo": "http://purl.org/ontology/bibo/", 
+   "rdfs": "http://www.w3.org/2000/01/rdf-schema#", 
+   "prov": "http://www.w3.org/ns/prov#", 
+   "sdmx-code": "http://purl.org/linked-data/sdmx/2009/code#", 
+   "napp-can91": "http://data.socialhistory.org/resource/napp/dataset/canada1891/", 
+   "hiscam": "http://data.socialhistory.org/resource/hiscam/", 
+   "dbpedia": "http://dbpedia.org/resource/", 
+   "np": "http://www.nanopub.org/nschema#", 
+   "canfam-auke": "http://data.socialhistory.org/resource/canfam/auke/", 
+   "dcterms": "http://purl.org/dc/terms/", 
+   "schema": "http://schema.org/", 
+   "foaf": "http://xmlns.com/foaf/0.1/", 
+   "napp": "http://data.socialhistory.org/resource/napp/", 
+   "sdv": "http://data.socialhistory.org/vocab/", 
+   "hisco": "http://data.socialhistory.org/resource/hisco/", 
+   "sdp": "http://data.socialhistory.org/resource/person/", 
+   "sdr": "http://data.socialhistory.org/resource/", 
+   "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#", 
+   "time": "http://www.w3.org/2006/time#", 
+   "hsn": "http://data.socialhistory.org/resource/hsn2013a/", 
+   "dc": "http://purl.org/dc/terms/", 
+   "hisco-relation": "http://data.socialhistory.org/resource/hisco/relation/", 
+   "hisco-status": "http://data.socialhistory.org/resource/hisco/status/", 
+   "dbp": "http://dbpedia.org/property/", 
+   "clioprop": "http://data.socialhistory.org/resource/clio/property/", 
+   "sdmx-concept": "http://purl.org/linked-data/sdmx/2009/concept#", 
+   "csvw": "http://www.w3.org/ns/csvw#", 
+   "clioind": "http://data.socialhistory.org/resource/clio/indicator/", 
+   "dc11": "http://purl.org/dc/elements/1.1/", 
+   "canfam-dimension": "http://data.socialhistory.org/vocab/canfam/dimension/", 
+   "napp-eng81": "http://data.socialhistory.org/resource/napp/dataset/englandwales1881/", 
+   "canfam": "http://data.socialhistory.org/resource/canfam/dataset/canada1901/", 
+   "napp-sct81": "http://data.socialhistory.org/resource/napp/dataset/scotland1881/", 
+   "sdmx-measure": "http://purl.org/linked-data/sdmx/2009/measure#", 
+   "qb": "http://purl.org/linked-data/cube#", 
+   "hisclass5": "http://data.socialhistory.org/resource/hisclass5/", 
+   "xsd": "http://www.w3.org/2001/XMLSchema#", 
+   "sdmx-dimension": "http://purl.org/linked-data/sdmx/2009/dimension#", 
+   "napp-dimension": "http://data.socialhistory.org/vocab/napp/dimension/",
+   "insee-geo": "http://id.insee.fr/geo/",
+   "gn": "http://www.geonames.org/ontology#",
+   "ISO19103": "http://def.seegrid.csiro.au/isotc211/iso19103/2005/basic#"
+
+  }
+ ], 
+ "dc:title": "guerry.csv", 
+ "@id": "http://data.socialhistory.org/resource/guerry.csv", 
+ "dc:modified": {
+  "@value": "2017-01-10", 
+  "@type": "xsd:date"
+ }, 
+ "tableSchema": {
+  "aboutUrl": "dept/{dept}", 
+  "primaryKey": "dept", 
+  "columns": [
+   {
+    "datatype": "int", 
+    "titles": [
+     "dept"
+    ], 
+    "@id": "http://data.socialhistory.org/resource/guerry.csv/column/dept", 
+    "name": "dept",
+    "propertyUrl": "dept_num", 
+    "dc:description": "Department ID: Standard numbers for the departments, except for Corsica (200)"
+   }, 
+   {
+    "valueUrl": "http://id.insee.fr/geo/departement/{dept}",
+    "propertyUrl": "skos:closeMatch",
+    "virtual": true,
+    "null": "200"
+   },
+   {
+    "valueUrl": "http://data.socialhistory.org/resource/clio/France/1820/1879",
+    "propertyUrl": "sdmx-dimension:refArea",
+    "virtual": true,
+    "null": "200"
+   },
+   {
+    "propertyUrl": "sdmx-dimension:refPeriod",
+    "csvw:value": "1831",
+    "virtual": true,
+    "datatype": "gYear"
+   },
+   {
+    "titles": [
+     "Region"
+    ], 
+    "@id": "http://data.socialhistory.org/resource/guerry.csv/column/Region", 
+    "name": "Region", 
+    "propertyUrl": "Region",
+    "valueUrl": "Region/{Region}",
+    "dc:description": "Region of France (’N’=’North’,’S’=’South’,’E’=’East’,’W’=’West’,’C’=’Central’). Corsica is coded as NA"
+   }, 
+   {
+    "datatype": "string", 
+    "titles": [
+     "Department"
+    ], 
+    "@id": "http://data.socialhistory.org/resource/guerry.csv/column/Department", 
+    "name": "Department", 
+    "dc:description": "Department name: Departments are named according to usage in 1830, but without accents"
+   }, 
+   {
+    "virtual": true,
+    "datatype": "string", 
+    "propertyUrl": "skos:prefLabel",
+    "csvw:value": "{Department}"
+   }, 
+   {
+    "datatype": "int", 
+    "titles": [
+     "Crime_pers"
+    ], 
+    "@id": "http://data.socialhistory.org/resource/guerry.csv/column/Crime_pers", 
+    "name": "Crime_pers", 
+    "dc:description": "Population per Crime against property"
+   }, 
+   {
+    "datatype": "int", 
+    "titles": [
+     "Crime_prop"
+    ], 
+    "@id": "http://data.socialhistory.org/resource/guerry.csv/column/Crime_prop", 
+    "name": "Crime_prop", 
+    "dc:description": "Population per Crime against property"
+   }, 
+   {
+    "datatype": "int", 
+    "titles": [
+     "Literacy"
+    ], 
+    "@id": "http://data.socialhistory.org/resource/guerry.csv/column/Literacy", 
+    "name": "Literacy", 
+    "dc:description": "Percent Read & Write: Percent of military conscripts who can read and write. Source: A2"
+   }, 
+   {
+    "datatype": "int", 
+    "titles": [
+     "Donations"
+    ], 
+    "@id": "http://data.socialhistory.org/resource/guerry.csv/column/Donations", 
+    "name": "Donations", 
+    "dc:description": "Donations to the poor. Source: A2 (Bulletin des lois)"
+   }, 
+   {
+    "datatype": "int", 
+    "titles": [
+     "Infants"
+    ], 
+    "@id": "http://data.socialhistory.org/resource/guerry.csv/column/Infants", 
+    "name": "Infants", 
+    "dc:description": "Population per illegitimate birth. Source: A2 (Bureaau des Longitudes, 1817-1821)"
+   }, 
+   {
+    "datatype": "int", 
+    "titles": [
+     "Suicides"
+    ], 
+    "@id": "http://data.socialhistory.org/resource/guerry.csv/column/Suicides", 
+    "name": "Suicides", 
+    "dc:description": "Population per suicide. Source: A2 (Compte général, 1827-1830)"
+   }, 
+   {
+    "titles": [
+     "MainCity"
+    ], 
+    "@id": "http://data.socialhistory.org/resource/guerry.csv/column/MainCity", 
+    "propertyUrl": "MainCity",
+    "valueUrl": "MainCity/{MainCity}",
+    "name": "MainCity", 
+    "dc:description": "Size of principal city ('1:Sm', '2:Med', '3:Lg'), used as a surrogate for poulation density. Large refers to the top 10, small to the bottom 10; all the rest are classed Medium. Source: A1. An ordered factor with levels 1:Sm < 2:Med < 3:Lg"
+   }, 
+   {
+    "datatype": "int", 
+    "titles": [
+     "Wealth"
+    ], 
+    "@id": "http://data.socialhistory.org/resource/guerry.csv/column/Wealth", 
+    "name": "Wealth", 
+    "dc:description": "Per capita tax on personal property. A ranked index based on taxes on personal and mov- able property per inhabitant. Source: A1"
+   }, 
+   {
+    "datatype": "int", 
+    "titles": [
+     "Commerce"
+    ], 
+    "@id": "http://data.socialhistory.org/resource/guerry.csv/column/Commerce", 
+    "name": "Commerce", 
+    "dc:description": "Commerce and Industry, measured by the rank of the number of patents / population. Source: A1"
+   }, 
+   {
+    "datatype": "int", 
+    "titles": [
+     "Clergy"
+    ], 
+    "@id": "http://data.socialhistory.org/resource/guerry.csv/column/Clergy", 
+    "name": "Clergy", 
+    "dc:description": "Distribution of clergy, measured by the rank of the number of Catholic priests in active service / population. Source: A1 (Almanach officiel du clergy, 1829)"
+   }, 
+   {
+    "datatype": "int", 
+    "titles": [
+     "Crime_parents"
+    ], 
+    "@id": "http://data.socialhistory.org/resource/guerry.csv/column/Crime_parents", 
+    "name": "Crime_parents", 
+    "dc:description": "Crimes against parents, measured by the rank of the ratio of crimes against parents to all crimes – Average for the years 1825-1830. Source: A1 (Compte général)"
+   }, 
+   {
+    "datatype": "int", 
+    "titles": [
+     "Infanticide"
+    ], 
+    "@id": "http://data.socialhistory.org/resource/guerry.csv/column/Infanticide", 
+    "name": "Infanticide", 
+    "dc:description": "Infanticides per capita. A ranked ratio of number of infanticides to population– Average for the years 1825-1830. Source: A1 (Compte général)"
+   }, 
+   {
+    "datatype": "int", 
+    "titles": [
+     "Donation_clergy"
+    ], 
+    "@id": "http://data.socialhistory.org/resource/guerry.csv/column/Donation_clergy", 
+    "name": "Donation_clergy", 
+    "dc:description": "Donations to the clergy. A ranked ratio of the number of bequests and donations inter vivios to population– Average for the years 1815-1824. Source: A1 (Bull. des lois, ordunn. d’autorisation)"
+   }, 
+   {
+    "datatype": "int", 
+    "titles": [
+     "Lottery"
+    ], 
+    "@id": "http://data.socialhistory.org/resource/guerry.csv/column/Lottery", 
+    "name": "Lottery", 
+    "dc:description": "Per capita wager on Royal Lottery. Ranked ratio of the proceeds bet on the royal lottery to population— Average for the years 1822-1826. Source: A1 (Compte rendus par le ministre des finances)"
+   }, 
+   {
+    "datatype": "int", 
+    "titles": [
+     "Desertion"
+    ], 
+    "@id": "http://data.socialhistory.org/resource/guerry.csv/column/Desertion", 
+    "name": "Desertion", 
+    "dc:description": "Military disertion, ratio of the number of young soldiers accused of desertion to the force of the military contingent, minus the deficit produced by the insufficiency of available billets– Average of the years 1825-1827. Source: A1 (Compte du ministere du guerre, 1829 etat V)"
+   }, 
+   {
+    "datatype": "int", 
+    "titles": [
+     "Instruction"
+    ], 
+    "@id": "http://data.socialhistory.org/resource/guerry.csv/column/Instruction", 
+    "name": "Instruction", 
+    "dc:description": "Instruction. Ranks recorded from Guerry’s map of Instruction. Note: this is inversely related to Literacy (as defined here)"
+   }, 
+   {
+    "datatype": "int", 
+    "titles": [
+     "Prostitutes"
+    ], 
+    "@id": "http://data.socialhistory.org/resource/guerry.csv/column/Prostitutes", 
+    "name": "Prostitutes", 
+    "dc:description": "Prostitutes in Paris. Number of prostitutes registered in Paris from 1816 to 1834, classified by the department of their birth Source: Parent-Duchatelet (1836), De la prostitution en Paris"
+   }, 
+   {
+    "datatype": "float", 
+    "titles": [
+     "Distance"
+    ], 
+    "@id": "http://data.socialhistory.org/resource/guerry.csv/column/Distance", 
+    "name": "Distance", 
+    "dc:description": "Distance to Paris (km). Distance of each department centroid to the centroid of the Seine (Paris) Source: calculated from department centroids"
+   }, 
+   {
+    "datatype": "int", 
+    "titles": [
+     "Area"
+    ], 
+    "@id": "http://data.socialhistory.org/resource/guerry.csv/column/Area", 
+    "name": "Area", 
+    "dc:description": "Area (1000 km^2). Source: Angeville (1836)"
+   }, 
+   {
+    "datatype": "int", 
+    "titles": [
+     "Pop1831"
+    ], 
+    "@id": "http://data.socialhistory.org/resource/guerry.csv/column/Pop1831", 
+    "name": "Pop1831", 
+    "dc:description": "1831 population. Population in 1831, taken from Angeville (1836), Essai sur la Statistique de la Population français, in 1000s"
+   },
+   {
+    "virtual": true,
+    "datatype": "int", 
+    "propertyUrl": "gn:population",
+    "csvw:value": "{{Pop1831|float() * 1000}}"
+   },
+   {
+    "virtual": true,
+    "datatype": "int", 
+    "propertyUrl": "ISO19103:Area",
+    "csvw:value": "{Area}"
+   },
+   {
+    "virtual": true,
+    "datatype": "int", 
+    "propertyUrl": "ISO19103:Distance",
+    "csvw:value": "{Distance}"
+   }
+  ]
+ }
+}</textarea>
+
+                    <a id="prettify" class="btn btn-info">prettify json</a>
+
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div id="reg-col-template" class="copycontainer">
+          <div class="cc">
+            <h3>Name</h3>
+            <div class="columncontent">
+              <select class="form-control attribute" name="datatype">
+                <option value="">no datatype</option>
+                <option>xsd:anyURI</option>
+                <option>xsd:base64Binary</option>
+                <option>xsd:boolean</option>
+                <option>xsd:byte</option>
+                <option>xsd:date</option>
+                <option>xsd:dateTime</option>
+                <option>xsd:decimal</option>
+                <option>xsd:double</option>
+                <option>xsd:duration</option>
+                <option>xsd:float</option>
+                <option>xsd:gDay</option>
+                <option>xsd:gMonth</option>
+                <option>xsd:gMonthDay</option>
+                <option>xsd:gYear</option>
+                <option>xsd:gYearMonth</option>
+                <option>xsd:hexBinary</option>
+                <option>xsd:ID</option>
+                <option>xsd:IDREF</option>
+                <option>xsd:IDREFS</option>
+                <option>int</option>
+                <option>xsd:integer</option>
+                <option>xsd:language</option>
+                <option>xsd:long</option>
+                <option>xsd:Name</option>
+                <option>xsd:NCName</option>
+                <option>xsd:negativeInteger</option>
+                <option>xsd:NMTOKEN</option>
+                <option>xsd:NMTOKENS</option>
+                <option>xsd:nonNegativeInteger</option>
+                <option>xsd:nonPositiveInteger</option>
+                <option>xsd:normalizedString</option>
+                <option>xsd:positiveInteger</option>
+                <option>xsd:QName</option>
+                <option>xsd:short</option>
+                <option>string</option>
+                <option>xsd:time</option>
+                <option>xsd:token</option>
+                <option>xsd:unsignedByte</option>
+                <option>xsd:unsignedInt</option>
+                <option>xsd:unsignedLong</option>
+                <option>xsd:unsignedShort</option>
+              </select>
+
+              <input class="form-control attribute" type="text" name="lang" value="" placeholder="language, e.g. 'en', 'nl' - only needed when datatype is string" />
+              
+              <textarea class="form-control attribute" name="dc:description" placeholder="description"></textarea>
+
+              <input class="form-control attribute" type="text" name="aboutUrl" value="" placeholder="aboutUrl" />
+            
+              <input class="form-control attribute" type="text" name="valueUrl" value="" placeholder="valueUrl" />
+              
+              <input class="form-control attribute" type="text" name="propertyUrl" value="" placeholder="propertyUrl" />
+              
+              <input type="hidden" name="jsondata" value="" />
+
+              <a href="#" class="addvirtual">add virtual column</a>
+            </div>
+          </div>
+        </div>
+        <div id="vir-col-template" class="copycontainer">
+          <div class="cc">
+            <h3>Virtual Column</h3>
+            
+            <div class="columncontent">
+              <select class="form-control attribute" name="datatype">
+                <option value="">no datatype</option>
+                <option>xsd:anyURI</option>
+                <option>xsd:base64Binary</option>
+                <option>xsd:boolean</option>
+                <option>xsd:byte</option>
+                <option>xsd:date</option>
+                <option>xsd:dateTime</option>
+                <option>xsd:decimal</option>
+                <option>xsd:double</option>
+                <option>xsd:duration</option>
+                <option>float</option>
+                <option>xsd:gDay</option>
+                <option>xsd:gMonth</option>
+                <option>xsd:gMonthDay</option>
+                <option>xsd:gYear</option>
+                <option>xsd:gYearMonth</option>
+                <option>xsd:hexBinary</option>
+                <option>xsd:ID</option>
+                <option>xsd:IDREF</option>
+                <option>xsd:IDREFS</option>
+                <option>int</option>
+                <option>xsd:integer</option>
+                <option>xsd:language</option>
+                <option>xsd:long</option>
+                <option>xsd:Name</option>
+                <option>xsd:NCName</option>
+                <option>xsd:negativeInteger</option>
+                <option>xsd:NMTOKEN</option>
+                <option>xsd:NMTOKENS</option>
+                <option>xsd:nonNegativeInteger</option>
+                <option>xsd:nonPositiveInteger</option>
+                <option>xsd:normalizedString</option>
+                <option>xsd:positiveInteger</option>
+                <option>xsd:QName</option>
+                <option>xsd:short</option>
+                <option>string</option>
+                <option>xsd:time</option>
+                <option>xsd:token</option>
+                <option>xsd:unsignedByte</option>
+                <option>xsd:unsignedInt</option>
+                <option>xsd:unsignedLong</option>
+                <option>xsd:unsignedShort</option>
+              </select>
+
+              <input class="form-control attribute" type="text" name="lang" value="" placeholder="language, e.g. 'en', 'nl' - only needed when datatype is string" />
+              
+              <textarea class="form-control attribute" name="dc:description" placeholder="description"></textarea>
+
+              <input class="form-control attribute" type="text" name="aboutUrl" value="" placeholder="aboutUrl" />
+            
+              <input class="form-control attribute" type="text" name="valueUrl" value="" placeholder="valueUrl" />
+              
+              <input class="form-control attribute" type="text" name="propertyUrl" value="" placeholder="propertyUrl" />
+              
+              <input class="form-control attribute" type="text" name="csvw:value" value="" placeholder="csvw:value" />
+              
+              <input type="hidden" name="jsondata" value='{"virtual":true}' />
+
+              <a href="#" class="delvirtual">delete column</a>
+
+            </div>
+          </div>
+        </div>
+
+        
+
+        <!-- BOOTSTRAP Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>        
+    </body>
+</html>
