@@ -35,17 +35,17 @@ $(document).ready(function(){
 
 
 	$("#left img").hover(function(){
-		$(this).attr('src','/img/cow-left.png');
+		$(this).attr('src','img/cow-left.png');
 	},
 	function(){
-		$(this).attr('src','/img/cow-left-light.png');	
+		$(this).attr('src','img/cow-left-light.png');	
 	});
 
 	$("#right img").hover(function(){
-		$(this).attr('src','/img/cow-right.png');
+		$(this).attr('src','img/cow-right.png');
 	},
 	function(){
-		$(this).attr('src','/img/cow-right-light.png');	
+		$(this).attr('src','img/cow-right-light.png');	
 	});
 
 	$('#to-dataset').click(function(){

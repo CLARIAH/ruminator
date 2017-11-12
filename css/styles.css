@@ -42,12 +42,19 @@ h1 {
 }
 #cowjson{
 	height: 600px;
-	white-space: nowrap; 
+	white-space: pre;
 	overflow: auto;
 }
 #expandbuttons{
 	text-align: right;
-	cursor: pointer;
+	background-color: #D3B0A3;
+	margin-bottom: 6px;
+	border-radius: 4px;
+	padding: 4px 8px;
+	color: #fff
+}
+#expandbuttons a, #expandbuttons a:visited{
+	color: #fff;
 }
 .column, .metadata{
 	margin-bottom: 6px;
