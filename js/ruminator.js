@@ -1,13 +1,13 @@
 
 rum = {}; 
-indent = 3;
+indent = 2;
 
 $(document).ready(function(){
 
 
 	$('#left').click(function(){
 		
-		var jsondata = $('#cowjson').val();
+		var jsondata = editor.getValue();
 		if(jsondata != ""){
 			rum = JSON.parse(jsondata);
 		}
@@ -17,22 +17,13 @@ $(document).ready(function(){
 
 	$('#right').click(function(){
 		
+
 		updateJson();
 		var prettified = JSON.stringify(rum, null, indent);
-		$('#cowjson').val(prettified);
+		editor.setValue(prettified);
 		
 		return false;
 	});
-
-	$('#prettify').click(function(){
-
-		var cowjson = $('#cowjson').val();
-		var prettified = formatJSON(cowjson,indent);
-		$('#cowjson').val(prettified);
-
-	});
-
-
 
 	$("#left img").hover(function(){
 		$(this).attr('src','img/cow-left.png');
@@ -79,11 +70,34 @@ $(document).ready(function(){
 
 	showTab('#columns');
 
+	var cowjsontextarea = document.getElementById('cowjson');
+	//var myCodeMirror = CodeMirror.fromTextArea(cowjsontextarea);
+	editor = CodeMirror.fromTextArea(cowjsontextarea, {
+        matchBrackets: true,
+        autoCloseBrackets: true,
+        mode: "application/ld+json",
+        lineWrapping: false,
+        lineNumbers: true
+      });
+
+	// get testdata
+	var testjson;
+	$.getJSON('testdata/testdata-1.json', function(json) {
+		testjson = JSON.stringify(json, null, indent);
+		editor.setValue(testjson);
+	});
+
 });
 
 function showTab(tab){
 	$('.tabcontent').hide();
 	$(tab).show();
+	$('.tabs button').removeClass('current');
+	if(tab=="#columncontainer"){
+		$('.tabs #to-columns').addClass('current');
+	}else{
+		$('.tabs #to-'+tab.replace('#','')).addClass('current');
+	}
 }
 
 function updateForm(){

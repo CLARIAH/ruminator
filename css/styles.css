@@ -1,13 +1,68 @@
 
 body {
-    margin: 50px 0 0 0;
+    margin: 0;
+    background-color: #E6E6E6;
     padding: 0;
     width: 100%;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: #aaa;
     font-size: 14px;
 }
-
+.right {
+    overflow-x: hidden;
+    position: absolute;
+    bottom: 0;
+    top: 0;
+    right: 0;
+    width: 40%;
+    min-width: 400px;
+    box-sizing: border-box;
+}
+#ruminatorjson{
+	position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    overflow: auto;
+}
+#ruminatorjson .CodeMirror {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    top: 0;
+    height: auto !important;
+    background: #fff;
+    font-family: 'm_1regular', monospace;
+    line-height: 1.5em;
+}
+.left {
+    overflow-x: hidden;
+    position: absolute;
+    bottom: 0;
+    top: 34px;
+    background-color: #fff;
+    left: 0;
+    width: 50%;
+    min-width: 400px;
+    box-sizing: border-box;
+}
+#ruminatorform{
+	position: absolute;
+    bottom: 0;
+    left: 0;
+    top: 0;
+    width: 100%;
+    padding: 0;
+}
+#ruminatorbuttons{
+	position: fixed;
+	left: 50%;
+	top: 0;
+	bottom: 0;
+	padding-top:70px;
+	padding-left: 30px;
+}
 h1 {
     color: #A73911;
     letter-spacing: -3px;
@@ -17,49 +72,48 @@ h1 {
     margin-bottom: 0;
 }
 .tabs{
-	margin-bottom: 6px;
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 50%;
+	padding-left: 21px;
 }
 .tabs button{
-	border-radius: 5px 5px 0 0;
+	border-radius: 0 0 0 0;
 	margin-left: 4px;
-}
-#to-dataset{
-	background-color: #000;
-	color: #fff;
-}
-#to-columns{
 	background-color: #D3B0A3;
 	color: #fff;
 }
+.tabs button.current{
+	background-color: #fff;
+	color: #D3B0A3;
+}
+.btn.active.focus, .btn.active:focus, .btn.focus, .btn:active.focus, .btn:active:focus, .btn:focus{
+	outline: none;
+}
+#to-dataset{
+}
+#to-columns{
+}
 .tabcontent{
 	display: none;
+	height: 100%;
 }
 #help{
 	display: block;
 }
-#prettify{
-	margin-top: 20px;
-}
-#cowjson{
-	height: 600px;
-	white-space: pre;
-	overflow: auto;
-}
 #expandbuttons{
 	text-align: right;
-	background-color: #D3B0A3;
 	margin-bottom: 6px;
-	border-radius: 4px;
-	padding: 4px 8px;
-	color: #fff
+	padding: 8px 25px 0 0;
+	color: #666
 }
 #expandbuttons a, #expandbuttons a:visited{
-	color: #fff;
+	color: #666;
 }
 .column, .metadata{
 	margin-bottom: 6px;
-	border-radius: 4px;
-	padding: 8px;
+	padding: 8px 25px;
 	color: #666;
 }
 h3{
