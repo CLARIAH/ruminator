@@ -6,7 +6,6 @@ $(document).ready(function(){
 
 
 	$('#left').click(function(){
-		
 		var jsondata = editor.getValue();
 		if(jsondata != ""){
 			rum = JSON.parse(jsondata);
@@ -16,8 +15,6 @@ $(document).ready(function(){
 	});
 
 	$('#right').click(function(){
-		
-
 		updateJson();
 		return false;
 	});
@@ -63,12 +60,9 @@ $(document).ready(function(){
 	});
 
 
-
-
 	showTab('#columns');
 
 	var cowjsontextarea = document.getElementById('cowjson');
-	//var myCodeMirror = CodeMirror.fromTextArea(cowjsontextarea);
 	editor = CodeMirror.fromTextArea(cowjsontextarea, {
         matchBrackets: true,
         autoCloseBrackets: true,
@@ -78,7 +72,6 @@ $(document).ready(function(){
       });
 
 	// get testdata
-	var testjson;
 	$.getJSON('testdata/testdata-1.json', function(json) {
 		testjson = JSON.stringify(json, null, indent);
 		editor.setValue(testjson);
@@ -114,7 +107,7 @@ function updateForm(){
 	metadataBlock = createMetadataBlock(rum);
 	metadataBlock.appendTo('#dataset');
 
-	// bind some actions
+	// bind some actions to freshly made elements
 	bindevents();
 
 	// and show columns
@@ -168,6 +161,21 @@ function bindevents(){
 		vircolumn.remove();
 		return false;
 	});
+	
+	$('select[name="objecttype"]').change(function(){
+		var objecttype = $(this).val();
+		if(objecttype=="valueUrl"){
+			$(this).siblings('input[name="csvw:value"]').hide();
+			$(this).siblings('input[name="csvw:value"]').val('');
+			$(this).siblings('input[name="valueUrl"]').show();
+		}
+		if(objecttype=="csvw:value"){
+			$(this).siblings('input[name="valueUrl"]').hide();
+			$(this).siblings('input[name="valueUrl"]').val('');
+			$(this).siblings('input[name="csvw:value"]').show();
+		}
+	});
+	
 }
 
 
@@ -227,6 +235,13 @@ function createColumnBlock(coldata, index){
 		var column = $('#vir-col-template .cc').clone();
 		column.addClass('column virtual-column').removeClass('cc');
 		var content = column.children('.columncontent');
+		if ( typeof coldata['valueUrl'] !== 'undefined'){
+			content.children("select[name=objecttype]").val('valueUrl');
+			content.children('input[name="csvw:value"]').hide();
+		}else{
+			content.children("select[name=objecttype]").val('csvw:value');
+			content.children('input[name="valueUrl"]').hide();
+		}
 	}else{
 		var column = $('#reg-col-template .cc').clone();
 		column.addClass('column regular-column').removeClass('cc');

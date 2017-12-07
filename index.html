@@ -142,11 +142,11 @@
             
             <textarea class="form-control attribute" name="dc:description" placeholder="description"></textarea>
 
-            <input class="form-control attribute" type="text" name="aboutUrl" value="" placeholder="aboutUrl" />
-          
-            <input class="form-control attribute" type="text" name="valueUrl" value="" placeholder="valueUrl" />
-            
+            predicate / propertyUrl <br />
             <input class="form-control attribute" type="text" name="propertyUrl" value="" placeholder="propertyUrl" />
+            
+            object / valueUrl<br />
+            <input class="form-control attribute" type="text" name="valueUrl" value="" placeholder="valueUrl" />
             
             <input type="hidden" name="jsondata" value="" />
 
@@ -208,12 +208,19 @@
             
             <textarea class="form-control attribute" name="dc:description" placeholder="description"></textarea>
 
+            subject / aboutUrl<br />
             <input class="form-control attribute" type="text" name="aboutUrl" value="" placeholder="aboutUrl" />
-          
-            <input class="form-control attribute" type="text" name="valueUrl" value="" placeholder="valueUrl" />
             
+            predicate / propertyUrl<br />
             <input class="form-control attribute" type="text" name="propertyUrl" value="" placeholder="propertyUrl" />
             
+            object / 
+            <select name="objecttype">
+              <option>valueUrl</option>
+              <option>csvw:value</option>
+            </select>
+
+            <input class="form-control attribute" type="text" name="valueUrl" value="" placeholder="valueUrl" />
             <input class="form-control attribute" type="text" name="csvw:value" value="" placeholder="csvw:value" />
             
             <input type="hidden" name="jsondata" value='{"virtual":true}' />

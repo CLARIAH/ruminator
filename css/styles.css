@@ -124,6 +124,9 @@ h3{
 	clear: both;
 	cursor: pointer;
 }
+label{
+	font-weight: normal;
+}
 .regular-column{
 	background-color: #D3B0A3;
 }
@@ -147,6 +150,9 @@ h3{
 .column input, .column textarea, .column select{
 	font-size: 12px;
 	color: #666;
+}
+select[name="objecttype"]{
+	margin-bottom: 3px;
 }
 input[name="lang"]{
 	display: none;
