@@ -19,9 +19,6 @@ $(document).ready(function(){
 		
 
 		updateJson();
-		var prettified = JSON.stringify(rum, null, indent);
-		editor.setValue(prettified);
-		
 		return false;
 	});
 
@@ -203,6 +200,13 @@ function updateJson(){
 	rum.dialect.encoding = $('#encoding').val();
 	rum['dc:publisher']['schema:name'] = $('#publisher-name').val();
 	rum['dc:publisher']['schema:url']['@id'] = $('#publisher-url').val();
+
+	var prettified = JSON.stringify(rum, null, indent);
+	var topline = editor.getScrollInfo();
+	//console.log(topline);
+	editor.setValue(prettified);
+		
+	editor.scrollTo(topline.left,topline.top);
 
 }
 
