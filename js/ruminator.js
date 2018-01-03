@@ -11,6 +11,7 @@ $(document).ready(function(){
 			rum = JSON.parse(jsondata);
 		}
 		updateForm();
+		localStorage.cowjson = jsondata;
 		return false;
 	});
 
@@ -71,11 +72,17 @@ $(document).ready(function(){
         lineNumbers: true
       });
 
-	// get testdata
-	$.getJSON('testdata/testdata-1.json', function(json) {
-		testjson = JSON.stringify(json, null, indent);
-		editor.setValue(testjson);
-	});
+	// see if there's any data stored
+	if (localStorage.cowjson) {
+	    editor.setValue(localStorage.cowjson);
+	} else {
+	    console.log('no cowjson found');
+		$.getJSON('testdata/testdata-1.json', function(json) {
+			testjson = JSON.stringify(json, null, indent);
+			editor.setValue(testjson);
+		});
+	}
+	
 
 });
 
@@ -147,6 +154,8 @@ function bindevents(){
 				$(this).siblings('input[name="lang"]').val('');
 			}
 		});
+		column.children('.columncontent').children('input[name="csvw:value"]').hide();
+		column.children('.columncontent').children('select[name="objecttype"]').change(changeObjectType);
 		column.children('.columncontent').children('.delvirtual').click(function(){
 			var vircolumn = $(this).closest('.virtual-column');
 			vircolumn.remove();
@@ -162,20 +171,23 @@ function bindevents(){
 		return false;
 	});
 	
-	$('select[name="objecttype"]').change(function(){
-		var objecttype = $(this).val();
-		if(objecttype=="valueUrl"){
-			$(this).siblings('input[name="csvw:value"]').hide();
-			$(this).siblings('input[name="csvw:value"]').val('');
-			$(this).siblings('input[name="valueUrl"]').show();
-		}
-		if(objecttype=="csvw:value"){
-			$(this).siblings('input[name="valueUrl"]').hide();
-			$(this).siblings('input[name="valueUrl"]').val('');
-			$(this).siblings('input[name="csvw:value"]').show();
-		}
-	});
+	$('select[name="objecttype"]').change(changeObjectType);
 	
+}
+
+
+function changeObjectType(){
+	var objecttype = $(this).val();
+	if(objecttype=="valueUrl"){
+		$(this).siblings('input[name="csvw:value"]').hide();
+		$(this).siblings('input[name="csvw:value"]').val('');
+		$(this).siblings('input[name="valueUrl"]').show();
+	}
+	if(objecttype=="csvw:value"){
+		$(this).siblings('input[name="valueUrl"]').hide();
+		$(this).siblings('input[name="valueUrl"]').val('');
+		$(this).siblings('input[name="csvw:value"]').show();
+	}
 }
 
 
@@ -216,6 +228,8 @@ function updateJson(){
 		
 	editor.scrollTo(topline.left,topline.top);
 
+	localStorage.cowjson = prettified;
+
 }
 
 
@@ -235,12 +249,12 @@ function createColumnBlock(coldata, index){
 		var column = $('#vir-col-template .cc').clone();
 		column.addClass('column virtual-column').removeClass('cc');
 		var content = column.children('.columncontent');
-		if ( typeof coldata['valueUrl'] !== 'undefined'){
-			content.children("select[name=objecttype]").val('valueUrl');
-			content.children('input[name="csvw:value"]').hide();
-		}else{
+		if ( typeof coldata['csvw:value'] !== 'undefined'){
 			content.children("select[name=objecttype]").val('csvw:value');
 			content.children('input[name="valueUrl"]').hide();
+		}else{
+			content.children("select[name=objecttype]").val('valueUrl');
+			content.children('input[name="csvw:value"]').hide();
 		}
 	}else{
 		var column = $('#reg-col-template .cc').clone();
