@@ -129,7 +129,7 @@ function bindevents(){
 
 	$('.columncontent select[name="datatype"]').change(function(){
 		var datatype = $(this).val();
-		if(datatype=="string"){
+		if(datatype=="xsd:string"){
 			$(this).siblings('input[name="lang"]').show();
 		}else{
 			$(this).siblings('input[name="lang"]').hide();
@@ -265,8 +265,23 @@ function createColumnBlock(coldata, index){
 	content.children('input[name="jsondata"]').val(JSON.stringify(coldata));
 	content.children('textarea[name="dc:description"]').html(coldata['dc:description']);
 	if ( typeof coldata['datatype'] !== 'undefined'){
+		if(coldata['datatype'].startsWith('xsd:')==false){ // should be prefixed with xsd:
+			coldata['datatype'] = 'xsd:' + coldata['datatype'];
+		}
+		var exists = false;
+		content.children('select[name="datatype"]').children('option').each(function(){
+			if (this.value == coldata['datatype']) {
+		        exists = true;
+		        return false;
+		    }
+		});
+		if(exists===false){ // accept all datatypes from json
+			content.children('select[name="datatype"]').append($("<option></option>")
+                    .attr("value",coldata['datatype'])
+                    .text(coldata['datatype'])); 
+		}
 		content.children('select[name="datatype"]').val(coldata['datatype']);
-		if(coldata['datatype']=='string'){
+		if(coldata['datatype']=='xsd:string'){
 			content.children('input[name="lang"]').css('display','block');
 		}
 	}
